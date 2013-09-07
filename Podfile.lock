@@ -1,0 +1,17 @@
+PODS:
+  - Expecta (0.2.2)
+  - RKValueTransformers (1.0.0)
+
+DEPENDENCIES:
+  - Expecta (~> 0.2.1)
+  - RKValueTransformers (from `/Users/blake/Projects/RestKit/RKValueTransformers`)
+
+EXTERNAL SOURCES:
+  RKValueTransformers:
+    :path: /Users/blake/Projects/RestKit/RKValueTransformers
+
+SPEC CHECKSUMS:
+  Expecta: 99adbb2e366a02796477523bfd426143350d9caf
+  RKValueTransformers: 92ee9b31c9b0bc47ce6713bbc594fae0dff98ec0
+
+COCOAPODS: 0.24.0
