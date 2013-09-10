@@ -580,7 +580,7 @@ static dispatch_once_t RKDefaultValueTransformerOnceToken;
         if (success) return YES;
         else [errors addObject:underlyingError];
     }
-    NSDictionary *userInfo = @{ NSLocalizedDescriptionKey: [NSString stringWithFormat:@"Failed transformation of value '%@' to %@: none of the %d value transformers consulted were successful.", inputValue, outputValueClass, [matchingTransformers count]], RKValueTransformersDetailedErrorsKey: errors };
+    NSDictionary *userInfo = @{ NSLocalizedDescriptionKey: [NSString stringWithFormat:@"Failed transformation of value '%@' to %@: none of the %lu value transformers consulted were successful.", inputValue, outputValueClass, (unsigned long)[matchingTransformers count]], RKValueTransformersDetailedErrorsKey: errors };
     if (error) *error = [NSError errorWithDomain:RKValueTransformersErrorDomain code:RKValueTransformationErrorTransformationFailed userInfo:userInfo];
     return NO;
 }
