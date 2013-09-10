@@ -109,19 +109,19 @@ typedef NS_ENUM(NSUInteger, RKValueTransformationError) {
  @param error A pointer to an `NSError` object in which to assign a newly constructed error if the test fails. Cannot be `nil`.
  */
 #define RKValueTransformerTestOutputValueClassIsSubclassOfClass(outputValueClass, expectedClass, error) ({ \
-NSArray *supportedClasses = [expectedClass isKindOfClass:[NSArray class]] ? (NSArray *)expectedClass : @[ expectedClass ];\
-BOOL success = NO; \
-for (Class supportedClass in supportedClasses) {\
-if ([outputValueClass isSubclassOfClass:supportedClass]) { \
-success = YES; \
-break; \
-}; \
-} \
-if (! success) { \
-NSDictionary *userInfo = @{ NSLocalizedDescriptionKey: [NSString stringWithFormat:@"Expected an `outputValueClass` of type `%@`, but got a `%@`.", expectedClass, outputValueClass] };\
-if (error) *error = [NSError errorWithDomain:RKValueTransformersErrorDomain code:RKValueTransformationErrorUnsupportedOutputClass userInfo:userInfo]; \
-return NO; \
-} \
+    NSArray *supportedClasses = [expectedClass isKindOfClass:[NSArray class]] ? (NSArray *)expectedClass : @[ expectedClass ];\
+    BOOL success = NO; \
+    for (Class supportedClass in supportedClasses) {\
+        if ([outputValueClass isSubclassOfClass:supportedClass]) { \
+            success = YES; \
+            break; \
+        }; \
+    } \
+    if (! success) { \
+        NSDictionary *userInfo = @{ NSLocalizedDescriptionKey: [NSString stringWithFormat:@"Expected an `outputValueClass` of type `%@`, but got a `%@`.", expectedClass, outputValueClass] };\
+        if (error) *error = [NSError errorWithDomain:RKValueTransformersErrorDomain code:RKValueTransformationErrorUnsupportedOutputClass userInfo:userInfo]; \
+        return NO; \
+    } \
 })
 
 /**
@@ -136,10 +136,10 @@ return NO; \
  */
 #define RKValueTransformerTestTransformation(condition, error, ...) ({ \
 if (! (condition)) { \
-NSDictionary *userInfo = @{ NSLocalizedDescriptionKey: [NSString stringWithFormat:__VA_ARGS__] };\
-if (error) *error = [NSError errorWithDomain:RKValueTransformersErrorDomain code:RKValueTransformationErrorTransformationFailed userInfo:userInfo]; \
-return NO; \
-} \
+    NSDictionary *userInfo = @{ NSLocalizedDescriptionKey: [NSString stringWithFormat:__VA_ARGS__] };\
+    if (error) *error = [NSError errorWithDomain:RKValueTransformersErrorDomain code:RKValueTransformationErrorTransformationFailed userInfo:userInfo]; \
+        return NO; \
+    } \
 })
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -147,7 +147,7 @@ return NO; \
 @class RKCompoundValueTransformer;
 
 /**
- The `RKValueTransformer` class is an abstract base class for implementing a value transformer that conforms to the `RKValueTransforming` protocol. The class is provided to enable third-party extensions of the value transformer to be implemented through subclassing. The default implementation contains no behavior and will raise an exception if an implementation of `transformValue:toValue:ofClass:error:` is not provided by the subclass. `RKValueTransformer` also exposes accessors for the default value transformer implementations that are provided with RestKit.
+ The `RKValueTransformer` class is an abstract base class for implementing a value transformer that conforms to the `RKValueTransforming` protocol. The class is provided to enable third-party extensions of the value transformer to be implemented through subclassing. The default implementation contains no behavior and will raise an exception if an implementation of `transformValue:toValue:ofClass:error:` is not provided by the subclass. `RKValueTransformer` also exposes accessors for the default value transformer implementations that are provided with the library.
  */
 @interface RKValueTransformer : NSObject <RKValueTransforming>
 
@@ -166,7 +166,7 @@ return NO; \
 + (instancetype)stringToURLValueTransformer;
 
 /**
- Returns a transformer capable of transforming between `NSNumber` and `NSURL` representations.
+ Returns a transformer capable of transforming between `NSNumber` and `NSString` representations.
  */
 + (instancetype)numberToStringValueTransformer;
 
