@@ -19,7 +19,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "RKISO8601DateFormatter.h"
 
 /**
  Objects wish to perform transformation on values as part of a RestKit object mapping operation much adopt the `RKValueTransforming` protocol. Value transformers must introspect a given input value to determine if they are capable of performing a transformation and if so, perform the transformation and assign the new value to the given pointer to an output value and return `YES` or else construct an error describing the failure and return `NO`. Value transformers may also optionally implement a validation method that enables callers to determine if a given value transformer object is capable of performing a transformation on an input value.
@@ -208,6 +207,13 @@ if (! (condition)) { \
 + (instancetype)timeIntervalSince1970ToDateValueTransformer;
 
 /**
+ Returns a transformer capable of transforming between `NSDate` and `NSString` representations in which the string encodes date and time information in the ISO 8601 timestamp format.
+ 
+ Note that this transformer is only capable of handling a fully qualified timestamp string rather than the complete ISO 8601 format. For a more complete implementation of the ISO 8601 standard, see the []() project.
+ */
++ (instancetype)iso8601TimestampToDateValueTransformer;
+
+/**
  Returns a transformer capable of transforming any `NSObject` that implements the `stringValue` method into an `NSString` representation.
  */
 + (instancetype)stringValueTransformer;
@@ -228,10 +234,9 @@ if (! (condition)) { \
 + (instancetype)mutableValueTransformer;
 
 /**
- Returns the singleton instance of the default value transformer. The default transformer is a compound transformer that includes all the individual value transformers implemented on the `RKValueTransformer` base class as well as an instance of `RKISO8601DateForamtter` and `NSDateFormatter` instances for the following date format strings:
+ Returns the singleton instance of the default value transformer. The default transformer is a compound transformer that includes all the individual value transformers implemented on the `RKValueTransformer` base class as well as `NSDateFormatter` instances for the following date format strings:
  
     * MM/dd/yyyy
-    * yyyy-MM-dd'T'HH:mm:ss'Z'
     * yyyy-MM-dd
  
  All date formatters are configured to the use `en_US_POSIX` locale and the UTC time zone.
@@ -352,32 +357,3 @@ if (! (condition)) { \
 // Adopts `RKValueTransforming` to provide transformation from `NSString` <-> `NSDate`
 @interface NSDateFormatter (RKValueTransformers) <RKValueTransforming>
 @end
-
-@interface RKISO8601DateFormatter (RKValueTransformers) <RKValueTransforming>
-@end
-
-///----------------
-/// @name Functions
-///----------------
-
-/**
- Returns an date representation of a given string value by attempting to parse the string with all default date formatters in turn.
-
- @param dateString A string object encoding a date value.
- @return An `NSDate` object parsed from the given string, or `nil` if the string was found to be unparsable by all default date formatters.
- @see [RKObjectMapping defaultDateFormatters]
- */
-NSDate *RKDateFromString(NSString *dateString);
-
-/**
- Returns a string representation of a given date formatted with the preferred date formatter.
-
- This is a convenience function that is equivalent to the following example code:
-
- NSString *string = [[RKObjectMapping preferredDateFormatter] stringForObjectValue:date]
-
- @param date The date object to be formatted.
- @return An `NSString` object representation of the given date formatted by the preferred date formatter.
- @see [RKObjectMapping preferredDateFormatter]
- */
-NSString *RKStringFromDate(NSDate *date);
