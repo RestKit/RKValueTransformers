@@ -4,7 +4,7 @@ inhibit_all_warnings!
 
 def import_pods
   pod 'Expecta', '~> 0.2.1'
-  pod 'RKValueTransformers', :path => File.dirname(__FILE__)
+  pod 'RKValueTransformers', :path => '.'
 end
 
 target :ios do

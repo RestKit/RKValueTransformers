@@ -4,11 +4,11 @@ PODS:
 
 DEPENDENCIES:
   - Expecta (~> 0.2.1)
-  - RKValueTransformers (from `/Users/blake/Projects/RestKit/RKValueTransformers`)
+  - RKValueTransformers (from `.`)
 
 EXTERNAL SOURCES:
   RKValueTransformers:
-    :path: /Users/blake/Projects/RestKit/RKValueTransformers
+    :path: .
 
 SPEC CHECKSUMS:
   Expecta: 99adbb2e366a02796477523bfd426143350d9caf
