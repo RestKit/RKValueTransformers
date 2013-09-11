@@ -18,6 +18,8 @@
 //  limitations under the License.
 //
 
+#include <time.h>
+#include <xlocale.h>
 #import "RKValueTransformers.h"
 
 NSString *const RKValueTransformersErrorDomain = @"org.restkit.RKValueTransformers.ErrorDomain";
