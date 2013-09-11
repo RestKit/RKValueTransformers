@@ -5,7 +5,7 @@ Pod::Spec.new do |s|
   s.summary  = 'A powerful value transformation API extracted from RestKit.'
   s.homepage = 'https://github.com/RestKit/RKValueTransformers'
   s.authors  = { 'Blake Watters' => 'blakewatters@gmail.com', 'Samuel E. Giddins' => 'segiddins@segiddins.me' }
-  s.source   = { :git => 'https://github.com/RestKit/RKValueTransformers.git', :tag => '1.0.0' }
+  s.source   = { :git => 'https://github.com/RestKit/RKValueTransformers.git', :tag => "v#{s.version}" }
   s.source_files = 'Code'
   s.requires_arc = true
 
