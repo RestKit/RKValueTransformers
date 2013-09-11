@@ -885,11 +885,12 @@
     for (NSString *dateString in parsableDateStrings) {
         NSDate *date = nil;
         BOOL success = [valueTransformer transformValue:dateString toValue:&date ofClass:[NSDate class] error:&error];
-        STAssertTrue(success, @"Expected to be able to parse '%@' but could not.", dateString);
+        STAssertTrue(success, @"Expected to be able to parse '%@' but could not: %@", dateString, error);
     }
 
     // NOTE: These are *all* valid ISO 8601 date strings according to the spec, but cannot be handled by the transformer. Validation must reject these input values to prevent erroneous parsing.
-    NSArray *unparsableDateStrings = @[@"2009-12T12:34",
+    NSArray *unparsableDateStrings = @[@"2011-08-09T00:00Z", // No seconds...
+                                       @"2009-12T12:34",
                                        @"2009",
                                        @"2009-05-19",
                                        @"2009-05-19",
