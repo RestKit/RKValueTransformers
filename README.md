@@ -25,6 +25,7 @@ RKValueTransformers is a "batteries included" library that ships with value tran
   * `NSNull` <-> `nil`
   * Any class conforming to `NSCoding` <-> `NSData`
   * UNIX Time Interval encoded as `NSNumber` or `NSString` <-> `NSDate`
+  * ISO 8601 Timestamp strings <-> `NSDate` (only complete timestamps for years < 2038 are supported)
   * Any object implementing `stringValue` -> `NSString`
   * Any singular object to a collection (`NSArray`, `NSSet`, `NSOrderedSet` and their mutable counterparts)
   * Any object and an `NSDictionary` (object becomes a key for empty nested dictionary)
