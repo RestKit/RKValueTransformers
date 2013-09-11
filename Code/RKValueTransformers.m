@@ -383,7 +383,7 @@ static BOOL RKVTClassIsCollection(Class aClass)
             static dispatch_once_t onceToken;
             dispatch_once(&onceToken, ^{
                 iso8601DateFormatter = [[NSDateFormatter alloc] init];
-                [iso8601DateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZ"];
+                [iso8601DateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss'Z'"];
                 [iso8601DateFormatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
                 [iso8601DateFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"]];
             });

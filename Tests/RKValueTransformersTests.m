@@ -931,7 +931,7 @@
     BOOL success = [valueTransformer transformValue:inputValue toValue:&value ofClass:[NSString class] error:&error];
     expect(success).to.beTruthy();
     expect(value).to.beKindOf([NSString class]);
-    expect(value).to.equal(@"1970-01-01T00:00:00+0000");
+    expect(value).to.equal(@"1970-01-01T00:00:00Z");
 }
 
 - (void)testIso8601TimestampToDateValueTransformerTransformationFailsValidationFromStringToDateWithYearPast2038
