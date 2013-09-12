@@ -935,15 +935,22 @@
     expect(value).to.equal(@"1970-01-01T00:00:00Z");
 }
 
+/**
+ NOTE: This test has divergent behavior based on whether the host is 32 or 64bit. Under a system with a 32bit long (from which type_t is typedef'd) the maximum year representable is 2038.
+ */
 - (void)testIso8601TimestampToDateValueTransformerTransformationFailsValidationFromStringToDateWithYearPast2038
 {
     RKValueTransformer *valueTransformer = [RKValueTransformer iso8601TimestampToDateValueTransformer];
     id value = nil;
     NSError *error = nil;
-    BOOL success = [valueTransformer transformValue:@"2039-09-11T09:24:56-04:00" toValue:&value ofClass:[NSDate class] error:&error];
-    expect(success).to.beFalsy();
-    expect(error.domain).to.equal(RKValueTransformersErrorDomain);
-    expect(error.code).to.equal(RKValueTransformationErrorTransformationFailed);
+    BOOL success = [valueTransformer transformValue:@"3001-09-11T09:24:56-04:00" toValue:&value ofClass:[NSDate class] error:&error];
+    if (success) {
+        expect(value).to.beKindOf([NSDate class]);
+        expect([value description]).to.equal(@"3001-09-11 13:24:56 +0000");
+    } else {
+        expect(error.domain).to.equal(RKValueTransformersErrorDomain);
+        expect(error.code).to.equal(RKValueTransformationErrorTransformationFailed);
+    }
 }
 
 - (void)testIso8601TimestampToDateValueTransformerFailureWithUntransformableInputValue
