@@ -344,7 +344,65 @@ static BOOL RKVTClassIsCollection(Class aClass)
         RKValueTransformerTestInputValueIsKindOfClass(inputValue, (@[ [NSString class], [NSDate class] ]), error);
         RKValueTransformerTestOutputValueClassIsSubclassOfClass(outputValueClass, (@[ [NSString class], [NSDate class] ]), error);
         if ([outputValueClass isSubclassOfClass:[NSDate class]]) {
-          
+            static unsigned int const ISO_8601_MAX_LENGTH = 25;
+
+            if ([(NSString *)inputValue length] == 0) {
+                NSDictionary *userInfo = @{ NSLocalizedDescriptionKey: [NSString stringWithFormat:@"Cannot transform a zero length string"] };
+                if (error) *error = [NSError errorWithDomain:RKValueTransformersErrorDomain code:RKValueTransformationErrorUntransformableInputValue userInfo:userInfo];
+                return NO;
+            }
+
+            static NSRegularExpression *validISO8601RegularExpression = nil;
+            static dispatch_once_t onceToken;
+            dispatch_once(&onceToken, ^{
+                NSError *error = nil;
+                static const char * REGEX_ISO8601_TIMESTAMP =
+                "\\A(\\d{4})-(\\d{2})-(\\d{2})[T\\s](\\d{2}):(\\d{2}):(\\d{2})" // Mandatory - YYYY-MM-DD(T|\s)hh:mm:ss
+                "(?:"
+                "[.](\\d{1,6})"                                   // Optional - .nnnnnn
+                ")?"
+                "(?:"
+                "([+-])(\\d{2}):?(\\d{2})|Z"                       // Optional -[+-]hh:?mm or Z
+                ")?\\z";
+                NSString *regexString = [[NSString alloc] initWithUTF8String:REGEX_ISO8601_TIMESTAMP];
+                validISO8601RegularExpression = [NSRegularExpression regularExpressionWithPattern:regexString
+                                                                                          options:NSRegularExpressionCaseInsensitive
+                                                                                            error:&error];
+
+                if (! validISO8601RegularExpression) [NSException raise:NSInternalInconsistencyException format:@"The ISO 8601 validation regex failed to parse: %@", error];
+            });
+
+            if (! [validISO8601RegularExpression numberOfMatchesInString:(NSString *)inputValue options:0 range:NSMakeRange(0, [inputValue length])]) {
+                NSDictionary *userInfo = @{ NSLocalizedDescriptionKey: [NSString stringWithFormat:@"Input value is not a valid ISO 8601 string: '%@'", inputValue] };
+                if (error) *error = [NSError errorWithDomain:RKValueTransformersErrorDomain code:RKValueTransformationErrorUntransformableInputValue userInfo:userInfo];
+                return NO;
+            }
+
+            const char *source = [(NSString *)inputValue cStringUsingEncoding:NSUTF8StringEncoding];
+            char destination[ISO_8601_MAX_LENGTH];
+            size_t length = strlen(source);
+
+            if (length == 20 && source[length - 1] == 'Z') {
+                memcpy(destination, source, length - 1);
+                strncpy(destination + length - 1, "+0000\0", 6);
+            } else if (length == 25 && source[22] == ':') {
+                memcpy(destination, source, 22);
+                memcpy(destination + 22, source + 23, 2);
+            } else {
+                memcpy(destination, source, MIN(length, ISO_8601_MAX_LENGTH - 1));
+            }
+
+            destination[sizeof(destination) - 1] = 0;
+
+            struct tm time = {
+                .tm_isdst = -1,
+            };
+            
+            strptime_l(destination, "%FT%T%z", &time, NULL);
+
+            time_t timeIntervalSince1970 = mktime(&time);
+            RKValueTransformerTestTransformation(timeIntervalSince1970 != -1, error, @"Failed transformation to date representation: time range is beyond the bounds supported by mktime");
+            *outputValue = [NSDate dateWithTimeIntervalSince1970:timeIntervalSince1970];
         } else if ([outputValueClass isSubclassOfClass:[NSString class]]) {
             static NSDateFormatter *iso8601DateFormatter = nil;
             static dispatch_once_t onceToken;
