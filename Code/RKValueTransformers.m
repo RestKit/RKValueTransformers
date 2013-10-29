@@ -545,9 +545,6 @@ static dispatch_once_t RKDefaultValueTransformerOnceToken;
                 dateFormatter.timeZone = [NSTimeZone timeZoneWithAbbreviation:@"UTC"];
                 [RKDefaultValueTransformer addValueTransformer:dateFormatter];
             }
-           // RKISO8601DateFormatter *dateFormatter = [RKISO8601DateFormatter defaultISO8601DateFormatter];
-           // [[RKValueTransformer defaultValueTransformer] insertValueTransformer:dateFormatter atIndex:0];
-
         }
     });
     return RKDefaultValueTransformer;
