@@ -878,14 +878,35 @@
 {
     RKValueTransformer *valueTransformer = [RKValueTransformer iso8601TimestampToDateValueTransformer];
     NSError *error = nil;
-    NSArray *parsableDateStrings = @[ @"2013-09-11T09:24:56-04:00",
-                                      @"2009-05-19 14:39:22",
-                                      @"2009-05-19T14:39:22-06:00",
-                                      @"2009-05-19 14:39:22+0600" ];
+    NSArray *parsableDateStrings = @[ @"2009-05-11 14:39:22",
+                                      @"2009-05-11T14:39:22",
+                                      @"2009-05-11T14:39:22-00:00",
+                                      @"2009-05-11T14:39:22-0000",
+                                      @"2009-05-11T14:39:22Z"];
     for (NSString *dateString in parsableDateStrings) {
         NSDate *date = nil;
         BOOL success = [valueTransformer transformValue:dateString toValue:&date ofClass:[NSDate class] error:&error];
         STAssertTrue(success, @"Expected to be able to parse '%@' but could not: %@", dateString, error);
+        
+        expect(success).to.beTruthy();
+        expect(date).to.beKindOf([NSDate class]);
+        expect(@([date timeIntervalSince1970])).to.equal(@(1242052762));
+    }
+    
+    parsableDateStrings = @[ @"2009-05-11 14:39:22.777",
+                             @"2009-05-11T14:39:22.777",
+                             @"2009-05-11T14:39:22.777-00:00",
+                             @"2009-05-11T14:39:22.777-0000",
+                             @"2009-05-11T14:39:22.777Z"];
+    
+    for (NSString *dateString in parsableDateStrings) {
+        NSDate *date = nil;
+        BOOL success = [valueTransformer transformValue:dateString toValue:&date ofClass:[NSDate class] error:&error];
+        STAssertTrue(success, @"Expected to be able to parse '%@' but could not: %@", dateString, error);
+        
+        expect(success).to.beTruthy();
+        expect(date).to.beKindOf([NSDate class]);
+        expect(@([date timeIntervalSince1970])).to.equal(@(1242052762.777));
     }
 
     // NOTE: These are *all* valid ISO 8601 date strings according to the spec, but cannot be handled by the transformer. Validation must reject these input values to prevent erroneous parsing.
@@ -932,7 +953,7 @@
     BOOL success = [valueTransformer transformValue:inputValue toValue:&value ofClass:[NSString class] error:&error];
     expect(success).to.beTruthy();
     expect(value).to.beKindOf([NSString class]);
-    expect(value).to.equal(@"1970-01-01T00:00:00Z");
+    expect(value).to.equal(@"1970-01-01T00:00:00.000Z");
 }
 
 /**
