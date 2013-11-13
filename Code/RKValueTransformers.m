@@ -382,9 +382,7 @@ static BOOL RKVTClassIsCollection(Class aClass)
             size_t length = strlen(constSource);
             
             char source[ISO_8601_MAX_LENGTH];
-            memcpy(source, constSource, MIN(length, ISO_8601_MAX_LENGTH - 1));
-            source[sizeof(source) - 1] = '\0';
-
+            memcpy(source, constSource, length + 1);
             if (constSource[10] != 'T')
                 source[10] = 'T';
             
