@@ -359,7 +359,6 @@ static BOOL RKVTClassIsCollection(Class aClass)
                 NSMutableString *newInputString = [NSMutableString stringWithString:[inputValue substringToIndex:19]];
                 NSMutableString *millisecondsString = [NSMutableString new];
                 
-                NSUInteger numOfFractionalDigits = 0;
                 NSUInteger index = 20;
                 for (; index < [inputValue length]; index++)
                 {
