@@ -352,7 +352,6 @@ static BOOL RKVTClassIsCollection(Class aClass)
                 if (error) *error = [NSError errorWithDomain:RKValueTransformersErrorDomain code:RKValueTransformationErrorUntransformableInputValue userInfo:userInfo];
                 return NO;
             }
-
             
             /* Strip milliseconds prior to parsing */
             double milliseconds = 0.f;
@@ -382,7 +381,7 @@ static BOOL RKVTClassIsCollection(Class aClass)
             size_t length = strlen(constSource);
             
             char source[ISO_8601_MAX_LENGTH];
-            memcpy(source, constSource, length + 1);
+            memcpy(source, constSource, sizeof (source));
             if (constSource[10] != 'T')
                 source[10] = 'T';
             
@@ -394,14 +393,12 @@ static BOOL RKVTClassIsCollection(Class aClass)
                 memcpy(destination, source, length - 1);
                 strncpy(destination + length - 1, "+0000\0", 6);
             } else {
+                memcpy(destination, source, sizeof (destination));
                 if (length == 25 && source[22] == ':') {
-                    memcpy(destination, source, 22);
-                    memcpy(destination + 22, source + 23, 2);
-                } else {
-                    memcpy(destination, source, MIN(length, ISO_8601_MAX_LENGTH - 1));
+                    destination[22] = destination[23];
+                    destination[23] = destination[24];
+                    destination[24] = '\0';
                 }
-                
-                destination[strlen(destination) - 1] = '\0';
             }
             
             struct tm time = {
