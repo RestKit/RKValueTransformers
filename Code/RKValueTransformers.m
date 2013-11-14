@@ -319,7 +319,7 @@ static BOOL RKVTClassIsCollection(Class aClass)
         RKValueTransformerTestInputValueIsKindOfClass(inputValue, (@[ [NSString class], [NSDate class] ]), error);
         RKValueTransformerTestOutputValueClassIsSubclassOfClass(outputValueClass, (@[ [NSString class], [NSDate class] ]), error);
         if ([outputValueClass isSubclassOfClass:[NSDate class]]) {
-            static unsigned int const ISO_8601_MAX_LENGTH = 25;
+            static unsigned int const ISO_8601_MAX_LENGTH = 29;
 
             if ([(NSString *)inputValue length] == 0) {
                 NSDictionary *userInfo = @{ NSLocalizedDescriptionKey: [NSString stringWithFormat:@"Cannot transform a zero length string"] };
@@ -352,38 +352,70 @@ static BOOL RKVTClassIsCollection(Class aClass)
                 if (error) *error = [NSError errorWithDomain:RKValueTransformersErrorDomain code:RKValueTransformationErrorUntransformableInputValue userInfo:userInfo];
                 return NO;
             }
-
-            const char *source = [(NSString *)inputValue cStringUsingEncoding:NSUTF8StringEncoding];
+            
+            /* Strip milliseconds prior to parsing */
+            double milliseconds = 0.f;
+            if (19 < [inputValue length] && ([inputValue characterAtIndex:19] == '.' || [inputValue characterAtIndex:19] == ':')) {
+                NSMutableString *newInputString = [NSMutableString stringWithString:[inputValue substringToIndex:19]];
+                NSMutableString *millisecondsString = [NSMutableString new];
+                
+                NSUInteger numOfFractionalDigits = 0;
+                NSUInteger index = 20;
+                for (; index < [inputValue length]; index++)
+                {
+                    unichar digit = [inputValue characterAtIndex:index];
+                    if(digit >= '0' && digit <= '9')
+                        [millisecondsString appendString:[NSString stringWithFormat:@"%C", digit]];
+                    else
+                        break;
+                }
+                
+                if (index != 20 && index < [inputValue length])
+                    [newInputString appendString:[inputValue substringFromIndex:index]];
+                
+                inputValue = [NSString stringWithString:newInputString];
+                milliseconds = [millisecondsString doubleValue]/1000.f;
+            }
+            
+            const char *constSource = [(NSString *)inputValue cStringUsingEncoding:NSUTF8StringEncoding];
+            size_t length = strlen(constSource);
+            
+            char source[ISO_8601_MAX_LENGTH];
+            memcpy(source, constSource, sizeof (source));
+            if (constSource[10] != 'T')
+                source[10] = 'T';
+            
             char destination[ISO_8601_MAX_LENGTH];
-            size_t length = strlen(source);
-
-            if (length == 20 && source[length - 1] == 'Z') {
+            if (length == 19) {
+                memcpy(destination, source, length);
+                strncpy(destination + length, "+0000\0", 6);
+            }else if (length == 20 && source[length - 1] == 'Z') {
                 memcpy(destination, source, length - 1);
                 strncpy(destination + length - 1, "+0000\0", 6);
-            } else if (length == 25 && source[22] == ':') {
-                memcpy(destination, source, 22);
-                memcpy(destination + 22, source + 23, 2);
             } else {
-                memcpy(destination, source, MIN(length, ISO_8601_MAX_LENGTH - 1));
+                memcpy(destination, source, sizeof (destination));
+                if (length == 25 && source[22] == ':') {
+                    destination[22] = destination[23];
+                    destination[23] = destination[24];
+                    destination[24] = '\0';
+                }
             }
-
-            destination[sizeof(destination) - 1] = 0;
-
+            
             struct tm time = {
                 .tm_isdst = -1,
             };
             
             strptime_l(destination, "%FT%T%z", &time, NULL);
-
+            
             time_t timeIntervalSince1970 = mktime(&time);
             RKValueTransformerTestTransformation(timeIntervalSince1970 != -1, error, @"Failed transformation to date representation: time range is beyond the bounds supported by mktime");
-            *outputValue = [NSDate dateWithTimeIntervalSince1970:timeIntervalSince1970];
+            *outputValue = [NSDate dateWithTimeIntervalSince1970:((double)timeIntervalSince1970 + milliseconds)];
         } else if ([outputValueClass isSubclassOfClass:[NSString class]]) {
             static NSDateFormatter *iso8601DateFormatter = nil;
             static dispatch_once_t onceToken;
             dispatch_once(&onceToken, ^{
                 iso8601DateFormatter = [[NSDateFormatter alloc] init];
-                [iso8601DateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss'Z'"];
+                [iso8601DateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"];
                 [iso8601DateFormatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
                 [iso8601DateFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"]];
             });
