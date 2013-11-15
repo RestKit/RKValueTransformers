@@ -248,12 +248,12 @@ static BOOL RKVTClassIsCollection(Class aClass)
             }
             @catch (NSException *exception) {
                 NSDictionary *userInfo = @{ NSLocalizedDescriptionKey: [NSString stringWithFormat:@"An `%@` exception was encountered while attempting to unarchive the given inputValue.", [exception name]], @"exception": exception };
-                *error = [NSError errorWithDomain:RKValueTransformersErrorDomain code:RKValueTransformationErrorTransformationFailed userInfo:userInfo];
+                if (error) *error = [NSError errorWithDomain:RKValueTransformersErrorDomain code:RKValueTransformationErrorTransformationFailed userInfo:userInfo];
                 return NO;
             }
             if (! [unarchivedValue isKindOfClass:outputValueClass]) {
                 NSDictionary *userInfo = @{ NSLocalizedDescriptionKey: [NSString stringWithFormat:@"Expected an `outputValueClass` of type `%@`, but the unarchived object is a `%@`.", outputValueClass, [unarchivedValue class]] };
-                *error = [NSError errorWithDomain:RKValueTransformersErrorDomain code:RKValueTransformationErrorTransformationFailed userInfo:userInfo];
+                if (error) *error = [NSError errorWithDomain:RKValueTransformersErrorDomain code:RKValueTransformationErrorTransformationFailed userInfo:userInfo];
                 return NO;
             }
             *outputValue = unarchivedValue;
@@ -262,7 +262,7 @@ static BOOL RKVTClassIsCollection(Class aClass)
             *outputValue = [NSKeyedArchiver archivedDataWithRootObject:inputValue];
         } else {
             NSDictionary *userInfo = @{ NSLocalizedDescriptionKey: [NSString stringWithFormat:@"Expected an `inputValue` of type `NSData` or conforming to `NSCoding`, but got a `%@` which does not satisfy these expectation.", [inputValue class]] };
-            *error = [NSError errorWithDomain:RKValueTransformersErrorDomain code:RKValueTransformationErrorUntransformableInputValue userInfo:userInfo];
+            if (error) *error = [NSError errorWithDomain:RKValueTransformersErrorDomain code:RKValueTransformationErrorUntransformableInputValue userInfo:userInfo];
             return NO;
         }
         return YES;
@@ -433,7 +433,7 @@ static BOOL RKVTClassIsCollection(Class aClass)
     } transformationBlock:^BOOL(id inputValue, __autoreleasing id *outputValue, Class outputValueClass, NSError *__autoreleasing *error) {
         if (! [inputValue respondsToSelector:@selector(stringValue)]) {
             NSDictionary *userInfo = @{ NSLocalizedDescriptionKey: @"Expected an `inputValue` that responds to `stringValue`, but it does not." };
-            *error = [NSError errorWithDomain:RKValueTransformersErrorDomain code:RKValueTransformationErrorUntransformableInputValue userInfo:userInfo];
+            if (error) *error = [NSError errorWithDomain:RKValueTransformersErrorDomain code:RKValueTransformationErrorUntransformableInputValue userInfo:userInfo];
             return NO;
         }
         RKValueTransformerTestOutputValueClassIsSubclassOfClass(outputValueClass, [NSString class], error);
@@ -451,7 +451,7 @@ static BOOL RKVTClassIsCollection(Class aClass)
     } transformationBlock:^BOOL(id inputValue, __autoreleasing id *outputValue, Class outputValueClass, NSError *__autoreleasing *error) {
         if (RKVTClassIsCollection([inputValue class])) {
             NSDictionary *userInfo = @{ NSLocalizedDescriptionKey: [NSString stringWithFormat:@"Expected an `inputValue` that is not a collection, but got a `%@`.", [inputValue class]] };
-            *error = [NSError errorWithDomain:RKValueTransformersErrorDomain code:RKValueTransformationErrorUntransformableInputValue userInfo:userInfo];
+            if (error) *error = [NSError errorWithDomain:RKValueTransformersErrorDomain code:RKValueTransformationErrorUntransformableInputValue userInfo:userInfo];
             return NO;
         }
         RKValueTransformerTestOutputValueClassIsSubclassOfClass(outputValueClass, (@[ [NSArray class], [NSSet class], [NSOrderedSet class]]), error);
@@ -479,7 +479,7 @@ static BOOL RKVTClassIsCollection(Class aClass)
     } transformationBlock:^BOOL(id inputValue, __autoreleasing id *outputValue, __unsafe_unretained Class outputValueClass, NSError *__autoreleasing *error) {
         if (! [inputValue conformsToProtocol:@protocol(NSMutableCopying)]) {
             NSDictionary *userInfo = @{ NSLocalizedDescriptionKey: [NSString stringWithFormat:@"Expected an `inputValue` that conforms to `NSMutableCopying`, but `%@` objects do not.", [inputValue class]] };
-            *error = [NSError errorWithDomain:RKValueTransformersErrorDomain code:RKValueTransformationErrorUntransformableInputValue userInfo:userInfo];
+            if (error) *error = [NSError errorWithDomain:RKValueTransformersErrorDomain code:RKValueTransformationErrorUntransformableInputValue userInfo:userInfo];
             return NO;
         }
         RKValueTransformerTestOutputValueClassIsSubclassOfClass(outputValueClass, mutableClasses, error);
@@ -497,7 +497,7 @@ static BOOL RKVTClassIsCollection(Class aClass)
     } transformationBlock:^BOOL(id inputValue, __autoreleasing id *outputValue, Class outputValueClass, NSError *__autoreleasing *error) {
         if (! [inputValue conformsToProtocol:@protocol(NSCopying)]) {
             NSDictionary *userInfo = @{ NSLocalizedDescriptionKey: @"Expected an `inputValue` that conforms to `NSCopying`, but it does not." };
-            *error = [NSError errorWithDomain:RKValueTransformersErrorDomain code:RKValueTransformationErrorUntransformableInputValue userInfo:userInfo];
+            if (error) *error = [NSError errorWithDomain:RKValueTransformersErrorDomain code:RKValueTransformationErrorUntransformableInputValue userInfo:userInfo];
             return NO;
         }
         RKValueTransformerTestOutputValueClassIsSubclassOfClass(outputValueClass, [NSDictionary class], error);
