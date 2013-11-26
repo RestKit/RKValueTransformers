@@ -100,7 +100,7 @@ RKValueTransformers supports the creation of ad-hoc value transformer instances 
 ```objc
 RKValueTransformer *uppercaseStringTransformer = [RKBlockValueTransformer valueTransformerWithValidationBlock:^BOOL(__unsafe_unretained Class sourceClass, __unsafe_unretained Class destinationClass) {
         // We transform a `NSString` into another `NSString`
-        return ([sourceClass isSubclassOfClass:[NSString class]] && [destinationClass isSubclassOfClass:[NSURL class]]);
+        return ([sourceClass isSubclassOfClass:[NSString class]] && [destinationClass isSubclassOfClass:[NSString class]]);
     } transformationBlock:^BOOL(id inputValue, __autoreleasing id *outputValue, Class outputValueClass, NSError *__autoreleasing *error) {
     	// Validate the input and output
         RKValueTransformerTestInputValueIsKindOfClass(inputValue, [NSString class], error);
