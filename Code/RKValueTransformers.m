@@ -542,7 +542,17 @@ static dispatch_once_t RKDefaultValueTransformerOnceToken;
             [RKDefaultValueTransformer addValueTransformer:[self iso8601TimestampToDateValueTransformer]];
             [RKDefaultValueTransformer addValueTransformer:[self timeIntervalSince1970ToDateValueTransformer]];
 
-            NSArray *defaultDateFormatStrings = @[ @"MM/dd/yyyy", @"yyyy-MM-dd" ];
+            // The latter three date format strings below represent the three
+            // date formats specified by the HTTP/1.1 protocol.  See
+            // http://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1
+            // for details
+            NSArray *defaultDateFormatStrings = @[
+                                                  @"MM/dd/yyyy",
+                                                  @"yyyy-MM-dd",
+                                                  @"EEE, dd MMM yyyy HH:mm:ss zzz", // RFC 1123
+                                                  @"EEEE, dd-MMM-yy HH:mm:ss zzz", // RFC 850
+                                                  @"EEE MMM d HH:mm:ss yyyy" // ANSI C asctime()
+                                                  ];
             for (NSString *dateFormatString in defaultDateFormatStrings) {
                 NSDateFormatter *dateFormatter = [NSDateFormatter new];
                 dateFormatter.dateFormat = dateFormatString;
