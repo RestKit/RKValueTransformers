@@ -157,6 +157,7 @@
 		25A0133D17DBC1F4006C2BD6 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastTestingUpgradeCheck = 0510;
 				LastUpgradeCheck = 0500;
 			};
 			buildConfigurationList = 25A0134017DBC1F4006C2BD6 /* Build configuration list for PBXProject "RKValueTransformersTests" */;
