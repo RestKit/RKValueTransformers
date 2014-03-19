@@ -5,12 +5,12 @@ namespace :test do
 
   desc "Run the RKValueTransformers Tests for iOS"
   task :ios => :prepare do
-    $ios_success = system("xcodebuild -workspace RKValueTransformers.xcworkspace -scheme 'iOS Tests' -sdk iphonesimulator platform='iOS Simulator',name='iPhone Retina (4-inch)' test | xcpretty -c; exit ${PIPESTATUS[0]}")
+    $ios_success = system("xcodebuild -workspace RKValueTransformers.xcworkspace -scheme 'iOS Tests' -sdk iphonesimulator platform='iOS Simulator',name='iPhone Retina (4-inch)' clean test | xcpretty -c; exit ${PIPESTATUS[0]}")
   end
 
   desc "Run the RKValueTransformers Tests for Mac OS X"
   task :osx => :prepare do
-    $osx_success = system("xcodebuild -workspace RKValueTransformers.xcworkspace -scheme 'OS X Tests' -sdk macosx test | xcpretty -c; exit ${PIPESTATUS[0]}")
+    $osx_success = system("xcodebuild -workspace RKValueTransformers.xcworkspace -scheme 'OS X Tests' -sdk macosx clean test | xcpretty -c; exit ${PIPESTATUS[0]}")
   end
 end
 
