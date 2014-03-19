@@ -18,7 +18,7 @@
 //  limitations under the License.
 //
 
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 #define EXP_SHORTHAND
 #import "Expecta.h"
 #import "RKValueTransformers.h"
@@ -30,7 +30,7 @@
 @implementation RKIncompleteValueTransformer
 @end
 
-@interface RKValueTransformerTest : SenTestCase
+@interface RKValueTransformerTest : XCTestCase
 @end
 
 @implementation RKValueTransformerTest
@@ -887,7 +887,7 @@
     for (NSString *dateString in parsableDateStrings) {
         NSDate *date = nil;
         BOOL success = [valueTransformer transformValue:dateString toValue:&date ofClass:[NSDate class] error:&error];
-        STAssertTrue(success, @"Expected to be able to parse '%@' but could not: %@", dateString, error);
+        XCTAssertTrue(success, @"Expected to be able to parse '%@' but could not: %@", dateString, error);
         
         expect(success).to.beTruthy();
         expect(date).to.beKindOf([NSDate class]);
@@ -903,7 +903,7 @@
     for (NSString *dateString in parsableDateStrings) {
         NSDate *date = nil;
         BOOL success = [valueTransformer transformValue:dateString toValue:&date ofClass:[NSDate class] error:&error];
-        STAssertTrue(success, @"Expected to be able to parse '%@' but could not: %@", dateString, error);
+        XCTAssertTrue(success, @"Expected to be able to parse '%@' but could not: %@", dateString, error);
         
         expect(success).to.beTruthy();
         expect(date).to.beKindOf([NSDate class]);
@@ -941,7 +941,7 @@
     for (NSString *dateString in unparsableDateStrings) {
         NSDate *date = nil;
         BOOL success = [valueTransformer transformValue:dateString toValue:&date ofClass:[NSDate class] error:&error];
-        STAssertFalse(success, @"Expected NOT to be able to parse '%@' but could.", dateString);
+        XCTAssertFalse(success, @"Expected NOT to be able to parse '%@' but could.", dateString);
     }
 }
 
@@ -1221,7 +1221,7 @@ static RKBlockValueTransformer *RKTestValueTransformerWithOutputValue(id staticO
     }];
 }
 
-@interface RKCompoundValueTransformerTest : SenTestCase
+@interface RKCompoundValueTransformerTest : XCTestCase
 @end
 
 @implementation RKCompoundValueTransformerTest
@@ -1407,7 +1407,7 @@ static RKBlockValueTransformer *RKTestValueTransformerWithOutputValue(id staticO
 
 @end
 
-@interface RKValueTransformers_NSNumberFormatterTests : SenTestCase
+@interface RKValueTransformers_NSNumberFormatterTests : XCTestCase
 @end
 
 @implementation RKValueTransformers_NSNumberFormatterTests
@@ -1498,7 +1498,7 @@ static RKBlockValueTransformer *RKTestValueTransformerWithOutputValue(id staticO
 
 @end
 
-@interface RKValueTransformers_NSDateFormatterTests : SenTestCase
+@interface RKValueTransformers_NSDateFormatterTests : XCTestCase
 @end
 
 @implementation RKValueTransformers_NSDateFormatterTests
