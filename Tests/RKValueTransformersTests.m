@@ -224,6 +224,8 @@
     expect(value).to.equal([NSNumber numberWithBool:YES]);
     [valueTransformer transformValue:@"Y" toValue:&value ofClass:[NSNumber class] error:&error];
     expect(value).to.equal([NSNumber numberWithBool:YES]);
+    [valueTransformer transformValue:@"1" toValue:&value ofClass:[NSNumber class] error:&error];
+    expect(value).to.equal([NSNumber numberWithBool:YES]);
     
     // False
     [valueTransformer transformValue:@"false" toValue:&value ofClass:[NSNumber class] error:&error];
@@ -241,6 +243,8 @@
     [valueTransformer transformValue:@"f" toValue:&value ofClass:[NSNumber class] error:&error];
     expect(value).to.equal([NSNumber numberWithBool:NO]);
     [valueTransformer transformValue:@"F" toValue:&value ofClass:[NSNumber class] error:&error];
+    expect(value).to.equal([NSNumber numberWithBool:NO]);
+    [valueTransformer transformValue:@"0" toValue:&value ofClass:[NSNumber class] error:&error];
     expect(value).to.equal([NSNumber numberWithBool:NO]);
 }
 
@@ -278,6 +282,28 @@
     expect(error).notTo.beNil();
     expect(error.domain).to.equal(RKValueTransformersErrorDomain);
     expect(error.code).to.equal(RKValueTransformationErrorUnsupportedOutputClass);
+}
+
+#pragma mark Number to BOOL
+
+- (void)testNumberToBOOLValueTransformationForFalseValue
+{
+    RKCompoundValueTransformer *valueTransformer = [RKValueTransformer defaultValueTransformer];
+    id value = nil;
+    NSError *error = nil;
+    BOOL success = [valueTransformer transformValue:@0 toValue:&value ofClass:[NSNumber class] error:&error];
+    expect(success).to.beTruthy();
+    expect(value).to.equal(@(NO));
+}
+
+- (void)testNumberToBOOLValueTransformationForTrueValue
+{
+    RKCompoundValueTransformer *valueTransformer = [RKValueTransformer defaultValueTransformer];
+    id value = nil;
+    NSError *error = nil;
+    BOOL success = [valueTransformer transformValue:@1 toValue:&value ofClass:[NSNumber class] error:&error];
+    expect(success).to.beTruthy();
+    expect(value).to.equal(@(YES));
 }
 
 #pragma mark Array to Ordered Set
