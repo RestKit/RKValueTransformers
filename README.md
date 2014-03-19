@@ -32,7 +32,10 @@ RKValueTransformers is a "batteries included" library that ships with value tran
   * Any singular object to a collection (`NSArray`, `NSSet`, `NSOrderedSet` and their mutable counterparts)
   * Any object and an `NSDictionary` (object becomes a key for empty nested dictionary)
   * Any class conforming to `NSMutableCoding` -> mutable representation of itself
-  * `NSString` <-> `NSDate` via `NSDateFormatter`
+  * `NSString` <-> `NSDate` via `NSDateFormatter`. Default formats include:
+  	* RFC 1123 format
+    * RFC 850 format
+    * ANSI C's asctime() format
   * `NSString` <-> `NSNumber` via `NSNumberFormatter`
 * Lightweight. Implemented in a single pair or header and implementation files.
 * Fully unit tested and documented.

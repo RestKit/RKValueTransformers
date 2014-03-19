@@ -1027,6 +1027,41 @@
     expect(error.code).to.equal(RKValueTransformationErrorUnsupportedOutputClass);
 }
 
+#pragma mark Default Date String Formats
+
+- (void)testRFC1123StringToDateValueTransformerTransformationSuccessFromStringToDate
+{
+    RKCompoundValueTransformer *valueTransformer = [RKValueTransformer defaultValueTransformer];
+    id value = nil;
+    NSError *error = nil;
+    BOOL success = [valueTransformer transformValue:@"Sun, 06 Nov 1994 08:49:37 GMT" toValue:&value ofClass:[NSDate class] error:&error];
+    expect(success).to.beTruthy();
+    expect(value).to.beKindOf([NSDate class]);
+    expect([value description]).to.equal(@"1994-11-06 08:49:37 +0000");
+}
+
+- (void)testRFC850StringToDateValueTransformerTransformationSuccessFromStringToDate
+{
+    RKCompoundValueTransformer *valueTransformer = [RKValueTransformer defaultValueTransformer];
+    id value = nil;
+    NSError *error = nil;
+    BOOL success = [valueTransformer transformValue:@"Sunday, 06-Nov-94 08:49:37 GMT" toValue:&value ofClass:[NSDate class] error:&error];
+    expect(success).to.beTruthy();
+    expect(value).to.beKindOf([NSDate class]);
+    expect([value description]).to.equal(@"1994-11-06 08:49:37 +0000");
+}
+
+- (void)testANSICStringToDateValueTransformerTransformationSuccessFromStringToDate
+{
+    RKCompoundValueTransformer *valueTransformer = [RKValueTransformer defaultValueTransformer];
+    id value = nil;
+    NSError *error = nil;
+    BOOL success = [valueTransformer transformValue:@"Sun Nov  6 08:49:37 1994" toValue:&value ofClass:[NSDate class] error:&error];
+    expect(success).to.beTruthy();
+    expect(value).to.beKindOf([NSDate class]);
+    expect([value description]).to.equal(@"1994-11-06 08:49:37 +0000");
+}
+
 #pragma mark Mutable Value
 
 - (void)testMutableValueTransformerValidationSuccessFromString
