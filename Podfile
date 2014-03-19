@@ -8,7 +8,7 @@ def import_pods
 end
 
 target :ios do
-  platform :ios, '5.0'
+  platform :ios, '5.1.1'
   link_with 'iOS Tests'
   import_pods
 end

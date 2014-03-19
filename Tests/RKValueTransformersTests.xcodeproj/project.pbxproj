@@ -380,6 +380,8 @@
 		25A0134117DBC1F4006C2BD6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1.1;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				ONLY_ACTIVE_ARCH = YES;
 			};
 			name = Debug;
@@ -387,6 +389,8 @@
 		25A0134217DBC1F4006C2BD6 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1.1;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 			};
 			name = Release;
 		};
