@@ -3,7 +3,7 @@ workspace 'RKValueTransformers'
 inhibit_all_warnings!
 
 def import_pods
-  pod 'Expecta', '~> 0.2.1'
+  pod 'Expecta', '~> 0.3.0'
   pod 'RKValueTransformers', :path => '.'
 end
 
