@@ -1,3 +1,5 @@
+source 'https://github.com/CocoaPods/Specs'
+
 xcodeproj 'Tests/RKValueTransformersTests'
 workspace 'RKValueTransformers'
 inhibit_all_warnings!
