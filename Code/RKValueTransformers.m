@@ -645,7 +645,7 @@ static dispatch_once_t RKDefaultValueTransformerOnceToken;
     return self;
 }
 
-- (void)clearCache
+- (void)invalidateCache
 {
     dispatch_barrier_sync(self.cacheQueue, ^{
         [self.transformerCache removeAllObjects];
@@ -661,14 +661,14 @@ static dispatch_once_t RKDefaultValueTransformerOnceToken;
 {
     if (! valueTransformer) [NSException raise:NSInvalidArgumentException format:@"Cannot add `nil` to a compound transformer."];
     [self.valueTransformers addObject:valueTransformer];
-    [self clearCache];
+    [self invalidateCache];
 }
 
 - (void)removeValueTransformer:(id<RKValueTransforming>)valueTransformer
 {
     if (! valueTransformer) [NSException raise:NSInvalidArgumentException format:@"Cannot remove `nil` from a compound transformer."];
     [self.valueTransformers removeObject:valueTransformer];
-    [self clearCache];
+    [self invalidateCache];
 }
 
 - (void)insertValueTransformer:(id<RKValueTransforming>)valueTransformer atIndex:(NSUInteger)index
@@ -694,8 +694,7 @@ static dispatch_once_t RKDefaultValueTransformerOnceToken;
         transformers = [[[self transformerCache] objectForKey:(id)sourceClass] objectForKey:(id)destinationClass];
     });
 
-    if (transformers != nil)
-        return transformers;
+    if (transformers != nil) return transformers;
 
     NSMutableArray *matchingTransformers = [NSMutableArray arrayWithCapacity:[self.valueTransformers count]];
     for (RKValueTransformer *valueTransformer in self) {
