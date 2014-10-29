@@ -615,6 +615,8 @@ static dispatch_once_t RKDefaultValueTransformerOnceToken;
 
 @interface RKCompoundValueTransformer ()
 @property (nonatomic, strong) NSMutableArray *valueTransformers;
+@property (nonatomic, strong) NSMutableDictionary *transformerCache;
+@property (nonatomic) dispatch_queue_t cacheQueue;
 @end
 
 @implementation RKCompoundValueTransformer
@@ -637,8 +639,17 @@ static dispatch_once_t RKDefaultValueTransformerOnceToken;
     self = [super init];
     if (self) {
         self.valueTransformers = [NSMutableArray new];
+        self.transformerCache = [NSMutableDictionary new];
+        self.cacheQueue = dispatch_queue_create("org.restkit.value-transformer.compound-cache", DISPATCH_QUEUE_CONCURRENT);
     }
     return self;
+}
+
+- (void)invalidateCache
+{
+    dispatch_barrier_sync(self.cacheQueue, ^{
+        [self.transformerCache removeAllObjects];
+    });
 }
 
 - (NSString *)description
@@ -650,12 +661,14 @@ static dispatch_once_t RKDefaultValueTransformerOnceToken;
 {
     if (! valueTransformer) [NSException raise:NSInvalidArgumentException format:@"Cannot add `nil` to a compound transformer."];
     [self.valueTransformers addObject:valueTransformer];
+    [self invalidateCache];
 }
 
 - (void)removeValueTransformer:(id<RKValueTransforming>)valueTransformer
 {
     if (! valueTransformer) [NSException raise:NSInvalidArgumentException format:@"Cannot remove `nil` from a compound transformer."];
     [self.valueTransformers removeObject:valueTransformer];
+    [self invalidateCache];
 }
 
 - (void)insertValueTransformer:(id<RKValueTransforming>)valueTransformer atIndex:(NSUInteger)index
@@ -674,6 +687,15 @@ static dispatch_once_t RKDefaultValueTransformerOnceToken;
 {
     if (sourceClass == Nil && destinationClass == Nil) return [self.valueTransformers copy];
     else if (sourceClass == Nil || destinationClass == Nil) [NSException raise:NSInvalidArgumentException format:@"If you specify a source or destination class then you must specify both."];
+
+    /* See if we have cached values */
+    __block NSArray *transformers;
+    dispatch_sync(self.cacheQueue, ^{
+        transformers = [[[self transformerCache] objectForKey:(id)sourceClass] objectForKey:(id)destinationClass];
+    });
+
+    if (transformers != nil) return transformers;
+
     NSMutableArray *matchingTransformers = [NSMutableArray arrayWithCapacity:[self.valueTransformers count]];
     for (RKValueTransformer *valueTransformer in self) {
         if (! [valueTransformer respondsToSelector:@selector(validateTransformationFromClass:toClass:)]
@@ -681,7 +703,21 @@ static dispatch_once_t RKDefaultValueTransformerOnceToken;
             [matchingTransformers addObject:valueTransformer];
         }
     }
-    return [matchingTransformers copy];
+    
+    transformers = [matchingTransformers copy];
+    dispatch_barrier_sync(self.cacheQueue, ^{
+        NSMutableDictionary *cache = self.transformerCache;
+        NSMutableDictionary *sourceDict = [cache objectForKey:sourceClass];
+        if (sourceDict == nil)
+        {
+            sourceDict = [NSMutableDictionary new];
+            [cache setObject:sourceDict forKey:(id)sourceClass];
+        }
+        
+        [sourceDict setObject:transformers forKey:(id)destinationClass];
+    });
+
+    return transformers;
 }
 
 - (id)objectAtIndexedSubscript:(NSUInteger)index
