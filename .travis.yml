@@ -1,5 +1,7 @@
 language: objective-c
+rvm:
+  - 2.1.3
 install:
-    - bundle install
-    - bundle exec pod install
+  - bundle install
+  - bundle exec pod install
 script: bundle exec rake test
