@@ -730,15 +730,19 @@ static dispatch_once_t RKDefaultValueTransformerOnceToken;
 - (BOOL)transformValue:(id)inputValue toValue:(__autoreleasing id *)outputValue ofClass:(__unsafe_unretained Class)outputValueClass error:(NSError *__autoreleasing *)error
 {
     NSArray *matchingTransformers = [self valueTransformersForTransformingFromClass:[inputValue class] toClass:outputValueClass];
-    NSMutableArray *errors = [NSMutableArray array];
+    NSMutableArray *errors;
     NSError *underlyingError = nil;
     for (id<RKValueTransforming> valueTransformer in matchingTransformers) {
         BOOL success = [valueTransformer transformValue:inputValue toValue:outputValue ofClass:outputValueClass error:&underlyingError];
         if (success) return YES;
-        else [errors addObject:underlyingError];
+        if (errors == nil) errors = [NSMutableArray new];
+        [errors addObject:underlyingError];
     }
-    NSDictionary *userInfo = @{ NSLocalizedDescriptionKey: [NSString stringWithFormat:@"Failed transformation of value '%@' to %@: none of the %lu value transformers consulted were successful.", inputValue, outputValueClass, (unsigned long)[matchingTransformers count]], RKValueTransformersDetailedErrorsKey: errors };
-    if (error) *error = [NSError errorWithDomain:RKValueTransformersErrorDomain code:RKValueTransformationErrorTransformationFailed userInfo:userInfo];
+
+    if (error) {
+        NSDictionary *userInfo = @{ NSLocalizedDescriptionKey: [NSString stringWithFormat:@"Failed transformation of value '%@' to %@: none of the %lu value transformers consulted were successful.", inputValue, outputValueClass, (unsigned long)[matchingTransformers count]], RKValueTransformersDetailedErrorsKey: errors };
+        *error = [NSError errorWithDomain:RKValueTransformersErrorDomain code:RKValueTransformationErrorTransformationFailed userInfo:userInfo];
+    }
     return NO;
 }
 
