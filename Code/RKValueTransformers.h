@@ -96,8 +96,10 @@ typedef NS_ENUM(NSUInteger, RKValueTransformationError) {
         success = [inputValue isKindOfClass:expectedArgument]; \
     } \
     if (! success) { \
-        NSDictionary *userInfo = @{ NSLocalizedDescriptionKey: [NSString stringWithFormat:@"Expected an `inputValue` of type `%@`, but got a `%@`.", expectedArgument, [inputValue class]] };\
-        if (error) *error = [NSError errorWithDomain:RKValueTransformersErrorDomain code:RKValueTransformationErrorUntransformableInputValue userInfo:userInfo]; \
+        if (error) { \
+            NSDictionary *userInfo = @{ NSLocalizedDescriptionKey: [NSString stringWithFormat:@"Expected an `inputValue` of type `%@`, but got a `%@`.", expectedArgument, [inputValue class]] };\
+            *error = [NSError errorWithDomain:RKValueTransformersErrorDomain code:RKValueTransformationErrorUntransformableInputValue userInfo:userInfo]; \
+        } \
         return NO; \
     } \
 })
@@ -125,8 +127,10 @@ typedef NS_ENUM(NSUInteger, RKValueTransformationError) {
         success = [outputValueClass isSubclassOfClass:expectedArgument]; \
     } \
     if (! success) { \
-        NSDictionary *userInfo = @{ NSLocalizedDescriptionKey: [NSString stringWithFormat:@"Expected an `outputValueClass` of type `%@`, but got a `%@`.", expectedArgument, outputValueClass] };\
-        if (error) *error = [NSError errorWithDomain:RKValueTransformersErrorDomain code:RKValueTransformationErrorUnsupportedOutputClass userInfo:userInfo]; \
+        if (error) { \
+            NSDictionary *userInfo = @{ NSLocalizedDescriptionKey: [NSString stringWithFormat:@"Expected an `outputValueClass` of type `%@`, but got a `%@`.", expectedArgument, outputValueClass] };\
+            *error = [NSError errorWithDomain:RKValueTransformersErrorDomain code:RKValueTransformationErrorUnsupportedOutputClass userInfo:userInfo]; \
+        } \
         return NO; \
     } \
 })
@@ -143,10 +147,12 @@ typedef NS_ENUM(NSUInteger, RKValueTransformationError) {
  */
 #define RKValueTransformerTestTransformation(condition, error, ...) ({ \
 if (! (condition)) { \
-    NSDictionary *userInfo = @{ NSLocalizedDescriptionKey: [NSString stringWithFormat:__VA_ARGS__] };\
-    if (error) *error = [NSError errorWithDomain:RKValueTransformersErrorDomain code:RKValueTransformationErrorTransformationFailed userInfo:userInfo]; \
-        return NO; \
+    if (error) { \
+        NSDictionary *userInfo = @{ NSLocalizedDescriptionKey: [NSString stringWithFormat:__VA_ARGS__] };\
+        *error = [NSError errorWithDomain:RKValueTransformersErrorDomain code:RKValueTransformationErrorTransformationFailed userInfo:userInfo]; \
     } \
+    return NO; \
+  } \
 })
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
