@@ -702,6 +702,14 @@ static dispatch_once_t RKDefaultValueTransformerOnceToken;
     return self;
 }
 
+- (void)dealloc
+{
+#if !OS_OBJECT_USE_OBJC
+    if (_cacheQueue) dispatch_release(_cacheQueue);
+#endif
+    _cacheQueue = NULL;
+}
+
 - (void)invalidateCache
 {
     dispatch_barrier_sync(self.cacheQueue, ^{
