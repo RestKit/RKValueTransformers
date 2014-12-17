@@ -1,6 +1,6 @@
 namespace :test do
   task :prepare do
-    system(%Q{mkdir -p "Tests/RKValueTransformersTests.xcodeproj/xcshareddata/xcschemes" && cp Tests/Schemes/*.xcscheme "Tests/RKValueTransformersTests.xcodeproj/xcshareddata/xcschemes/"})
+    sh(%Q{mkdir -p "Tests/RKValueTransformersTests.xcodeproj/xcshareddata/xcschemes" && cp Tests/Schemes/*.xcscheme "Tests/RKValueTransformersTests.xcodeproj/xcshareddata/xcschemes/"})
   end
 
   desc "Run the RKValueTransformers Tests for iOS"
