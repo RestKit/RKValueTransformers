@@ -306,6 +306,17 @@
     expect(value).to.equal(@(YES));
 }
 
+- (void)testNumberToArm64BOOLValueTransformationForTrueValue {
+    Class booleanClass = NSClassFromString(@"__NSCFBoolean");
+    if (!booleanClass) return;
+    RKCompoundValueTransformer *valueTransformer = [RKValueTransformer defaultValueTransformer];
+    id value = nil;
+    NSError *error = nil;
+    BOOL success = [valueTransformer transformValue:@1 toValue:&value ofClass:booleanClass error:&error];
+    expect(success).to.beTruthy();
+    expect(value).to.equal(@(YES));
+}
+
 #pragma mark Array to Ordered Set
 
 - (void)testArrayToOrderedSetTransformerValidationSuccessFromArrayToOrderedSet

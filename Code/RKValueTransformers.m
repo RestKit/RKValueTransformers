@@ -160,6 +160,34 @@ static BOOL RKVTClassIsCollection(Class aClass)
     }];
 }
 
++ (instancetype)numberToBooleanValueTransformer {
+    static dispatch_once_t onceToken;
+    static RKBlockValueTransformer *valueTransformer;
+
+    static dispatch_once_t booleanClassOnceToken;
+    static Class cfBooleanClass1;
+    static Class cfBooleanClass2;
+    static NSArray *validClasses;
+
+    dispatch_once(&booleanClassOnceToken, ^{
+        cfBooleanClass1 = NSClassFromString(@"__NSCFBoolean");
+        cfBooleanClass2 = NSClassFromString(@"NSCFBoolean");
+    });
+
+    return [self singletonValueTransformer:&valueTransformer name:NSStringFromSelector(_cmd) onceToken:&onceToken validationBlock:^BOOL(__unsafe_unretained Class sourceClass, __unsafe_unretained Class destinationClass) {
+        return (([sourceClass isSubclassOfClass:[NSNumber class]] && [destinationClass isSubclassOfClass:[cfBooleanClass1 class]]) ||
+                ([sourceClass isSubclassOfClass:[NSNumber class]] && [destinationClass isSubclassOfClass:[cfBooleanClass2 class]]));
+    } transformationBlock:^BOOL(id inputValue, __autoreleasing id *outputValue, Class outputValueClass, NSError *__autoreleasing *error) {
+
+        RKValueTransformerTestInputValueIsKindOfClass(inputValue, @[[NSNumber class]], error);
+        RKValueTransformerTestOutputValueClassIsSubclassOfClass(outputValueClass, @[[NSNumber class]], error);
+
+        *outputValue = inputValue;
+
+        return YES;
+    }];
+}
+
 + (instancetype)arrayToOrderedSetValueTransformer
 {
     static dispatch_once_t onceToken;
@@ -583,6 +611,7 @@ static dispatch_once_t RKDefaultValueTransformerOnceToken;
                                          [self decimalNumberToNumberValueTransformer],
                                          [self decimalNumberToStringValueTransformer],
 
+                                         [self numberToBooleanValueTransformer],
                                          [self numberToStringValueTransformer],
                                          [self arrayToOrderedSetValueTransformer],
                                          [self arrayToSetValueTransformer],
