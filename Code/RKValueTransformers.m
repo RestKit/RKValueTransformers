@@ -167,7 +167,6 @@ static BOOL RKVTClassIsCollection(Class aClass)
     static dispatch_once_t booleanClassOnceToken;
     static Class cfBooleanClass1;
     static Class cfBooleanClass2;
-    static NSArray *validClasses;
 
     dispatch_once(&booleanClassOnceToken, ^{
         cfBooleanClass1 = NSClassFromString(@"__NSCFBoolean");

@@ -8,10 +8,10 @@ DEPENDENCIES:
 
 EXTERNAL SOURCES:
   RKValueTransformers:
-    :path: .
+    :path: "."
 
 SPEC CHECKSUMS:
-  Expecta: 03aabd0a89d8dea843baecb19a7fd7466a69a31d
-  RKValueTransformers: e9c86911f07f98f4b26b2fe1b4e290764e786d6e
+  Expecta: a354d4633409dd9fe8c4f5ff5130426adbe31628
+  RKValueTransformers: d016f1967ae67997e492520fd0f9c512ccf168ae
 
-COCOAPODS: 0.35.0
+COCOAPODS: 0.36.3
