@@ -1411,6 +1411,31 @@ static RKBlockValueTransformer *RKTestValueTransformerWithOutputValue(id staticO
     expect(error.localizedDescription).to.equal(@"Failed transformation of value '2' to NSString: none of the 1 value transformers consulted were successful.");
 }
 
+- (void)testTransformingErrorWithoutDetailedErrors
+{
+    RKCompoundValueTransformer *compoundValueTransformer = [RKCompoundValueTransformer new];
+    NSString *outputValue;
+    NSError *error = nil;
+    BOOL success = [compoundValueTransformer transformValue:@"2" toValue:&outputValue ofClass:[NSString class] error:&error];
+    expect(success).to.beFalsy();
+    expect(outputValue).to.beNil();
+    expect(error.code).to.equal(RKValueTransformationErrorTransformationFailed);
+}
+
+- (void)testTransformingErrorWithNullErrorParameter
+{
+    RKCompoundValueTransformer *compoundValueTransformer = [RKCompoundValueTransformer new];
+    [compoundValueTransformer addValueTransformer:[RKBlockValueTransformer valueTransformerWithValidationBlock:nil transformationBlock:^BOOL(id inputValue, __autoreleasing id *outputValue, __unsafe_unretained Class outputClass, NSError *__autoreleasing *error) {
+        // Always fails
+        RKValueTransformerTestTransformation(NO, error, @"This is an underlying error.");
+        return YES;
+    }]];
+    NSString *outputValue;
+    BOOL success = [compoundValueTransformer transformValue:@"2" toValue:&outputValue ofClass:[NSString class] error:NULL];
+    expect(success).to.beFalsy();
+    expect(outputValue).to.beNil();
+}
+
 #pragma mark NSCopying
 
 - (void)testCopying
