@@ -784,7 +784,7 @@ static dispatch_once_t RKDefaultValueTransformerOnceToken;
     /* See if we have cached values */
     __block NSArray *transformers;
     dispatch_sync(self.cacheQueue, ^{
-        transformers = [[[self transformerCache] objectForKey:(id)sourceClass] objectForKey:(id)destinationClass];
+        transformers = [self transformerCache][(id)sourceClass][(id)destinationClass];
     });
 
     if (transformers != nil) return transformers;
@@ -800,14 +800,14 @@ static dispatch_once_t RKDefaultValueTransformerOnceToken;
     transformers = [matchingTransformers copy];
     dispatch_barrier_sync(self.cacheQueue, ^{
         NSMutableDictionary *cache = self.transformerCache;
-        NSMutableDictionary *sourceDict = [cache objectForKey:sourceClass];
+        NSMutableDictionary *sourceDict = cache[sourceClass];
         if (sourceDict == nil)
         {
             sourceDict = [NSMutableDictionary new];
-            [cache setObject:sourceDict forKey:(id)sourceClass];
+            cache[(id)sourceClass] = sourceDict;
         }
         
-        [sourceDict setObject:transformers forKey:(id)destinationClass];
+        sourceDict[(id)destinationClass] = transformers;
     });
 
     return transformers;
