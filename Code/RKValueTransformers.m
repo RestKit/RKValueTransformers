@@ -723,9 +723,9 @@ static dispatch_once_t RKDefaultValueTransformerOnceToken;
 {
     self = [super init];
     if (self) {
-        self.valueTransformers = [NSMutableArray new];
-        self.transformerCache = [NSMutableDictionary new];
-        self.cacheQueue = dispatch_queue_create("org.restkit.value-transformer.compound-cache", DISPATCH_QUEUE_CONCURRENT);
+        _valueTransformers = [NSMutableArray new];
+        _transformerCache = [NSMutableDictionary new];
+        _cacheQueue = dispatch_queue_create("org.restkit.value-transformer.compound-cache", DISPATCH_QUEUE_CONCURRENT);
     }
     return self;
 }
@@ -784,7 +784,7 @@ static dispatch_once_t RKDefaultValueTransformerOnceToken;
     /* See if we have cached values */
     __block NSArray *transformers;
     dispatch_sync(self.cacheQueue, ^{
-        transformers = [[[self transformerCache] objectForKey:(id)sourceClass] objectForKey:(id)destinationClass];
+        transformers = [[self.transformerCache objectForKey:(id)sourceClass] objectForKey:(id)destinationClass];
     });
 
     if (transformers != nil) return transformers;
