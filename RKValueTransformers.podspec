@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name     = 'RKValueTransformers'
-  s.version  = '1.1.2'
+  s.version  = '1.1.3'
   s.license  = 'Apache2'
   s.summary  = 'A powerful value transformation API extracted from RestKit.'
   s.homepage = 'https://github.com/RestKit/RKValueTransformers'
