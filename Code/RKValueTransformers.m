@@ -447,7 +447,7 @@ static BOOL RKVTClassIsCollection(Class aClass)
                     [newInputString appendString:[inputValue substringFromIndex:index]];
                 
                 inputValue = [NSString stringWithString:newInputString];
-                milliseconds = [millisecondsString doubleValue]/1000.f;
+                milliseconds = [millisecondsString doubleValue] / pow(10, millisecondsString.length);
             }
             
             const char *constSource = [(NSString *)inputValue cStringUsingEncoding:NSUTF8StringEncoding];
