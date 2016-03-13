@@ -911,6 +911,36 @@
     expect([value description]).to.equal(@"2013-09-11 13:24:56 +0000");
 }
 
+- (void)testIso8601TimestampToDateValueTransformerTransformationSuccessFromStringToDateWithMilliseconds
+{
+    RKValueTransformer *valueTransformer = [RKValueTransformer iso8601TimestampToDateValueTransformer];
+    id value = nil;
+    NSError *error = nil;
+    BOOL success = [valueTransformer transformValue:@"2013-09-11T09:24:56.123-04:00" toValue:&value ofClass:[NSDate class] error:&error];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS"];
+    formatter.timeZone = [NSTimeZone timeZoneForSecondsFromGMT:0];
+    NSString *formattedValue = [formatter stringFromDate:value];
+    expect(success).to.beTruthy();
+    expect(value).to.beKindOf([NSDate class]);
+    expect(formattedValue).to.equal(@"2013-09-11T13:24:56.123");
+}
+
+- (void)testIso8601TimestampToDateValueTransformerTransformationSuccessFromStringToDateWithMicroseconds
+{
+    RKValueTransformer *valueTransformer = [RKValueTransformer iso8601TimestampToDateValueTransformer];
+    id value = nil;
+    NSError *error = nil;
+    BOOL success = [valueTransformer transformValue:@"2013-09-11T09:24:56.123456-04:00" toValue:&value ofClass:[NSDate class] error:&error];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS"];
+    formatter.timeZone = [NSTimeZone timeZoneForSecondsFromGMT:0];
+    NSString *formattedValue = [formatter stringFromDate:value];
+    expect(success).to.beTruthy();
+    expect(value).to.beKindOf([NSDate class]);
+    expect(formattedValue).to.equal(@"2013-09-11T13:24:56.123");
+}
+
 - (void)testIso8601TimestampToDateValueTransformerTransformationValidationWithBatteryOfInputValues
 {
     RKValueTransformer *valueTransformer = [RKValueTransformer iso8601TimestampToDateValueTransformer];
