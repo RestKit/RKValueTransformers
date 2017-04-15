@@ -222,6 +222,12 @@ if (! (condition)) { \
 
 /**
  Returns a transformer capable of transforming between `NSDate` and `NSString` representations in which the string encodes date and time information in the ISO 8601 timestamp format.
+ */
+
++ (instancetype)iso8601DateToDateValueTransformer;
+
+/**
+ Returns a transformer capable of transforming between `NSDate` and `NSString` representations in which the string encodes date and time information in the ISO 8601 timestamp format.
  
  Note that this transformer is only capable of handling a fully qualified timestamp string rather than the complete ISO 8601 format. For a more complete implementation of the ISO 8601 standard, see the []() project.
  */

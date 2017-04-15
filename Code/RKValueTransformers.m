@@ -21,7 +21,7 @@
 #include <time.h>
 #include <xlocale.h>
 #import "RKValueTransformers.h"
-
+#import "ISO8601DateFormatterValueTransformer.h"
 NSString *const RKValueTransformersErrorDomain = @"org.restkit.RKValueTransformers.ErrorDomain";
 NSString *const RKValueTransformersDetailedErrorsKey = @"detailedErrors";
 
@@ -377,6 +377,31 @@ static BOOL RKVTClassIsCollection(Class aClass)
     }];
 }
 
++ (instancetype)iso8601DateToDateValueTransformer{
+    static dispatch_once_t onceToken;
+    static RKBlockValueTransformer *valueTransformer;
+    return [self singletonValueTransformer:&valueTransformer name:NSStringFromSelector(_cmd) onceToken:&onceToken validationBlock:^BOOL(__unsafe_unretained Class sourceClass, __unsafe_unretained Class destinationClass) {
+        return ((([sourceClass isSubclassOfClass:[NSString class]] || [sourceClass isSubclassOfClass:[NSNumber class]]) && [destinationClass isSubclassOfClass:[NSDate class]]) ||
+                ([sourceClass isSubclassOfClass:[NSDate class]] && ([destinationClass isSubclassOfClass:[NSNumber class]] || [destinationClass isSubclassOfClass:[NSString class]])));
+    } transformationBlock:^BOOL(id inputValue, __autoreleasing id *outputValue, __unsafe_unretained Class outputValueClass, NSError *__autoreleasing *error) {
+        static dispatch_once_t onceToken;
+        static NSNumberFormatter *numberFormatter;
+        dispatch_once(&onceToken, ^{
+            numberFormatter = [NSNumberFormatter new];
+            numberFormatter.numberStyle = NSNumberFormatterDecimalStyle;
+        });
+        RKValueTransformerTestInputValueIsKindOfClass(inputValue, (@[ [NSString class], [NSDate class] ]), error);
+        RKValueTransformerTestOutputValueClassIsSubclassOfClass(outputValueClass, (@[[NSString class], [NSDate class] ]), error);
+        RKISO8601DateFormatter *dateFormatter = [RKISO8601DateFormatter defaultISO8601DateFormatter];
+        if ([outputValueClass isSubclassOfClass:[NSDate class]]) {
+            [dateFormatter dateFromString:inputValue];
+        } else if ([outputValueClass isSubclassOfClass:[NSString class]]) {
+            *outputValue = [dateFormatter stringFromDate:inputValue];
+        }
+        return YES;
+    }];
+}
+
 + (instancetype)iso8601TimestampToDateValueTransformer
 {
     static dispatch_once_t onceToken;
@@ -626,6 +651,7 @@ static dispatch_once_t RKDefaultValueTransformerOnceToken;
             // Default date formatters
             [RKDefaultValueTransformer addValueTransformer:[self iso8601TimestampToDateValueTransformer]];
             [RKDefaultValueTransformer addValueTransformer:[self timeIntervalSince1970ToDateValueTransformer]];
+            [RKDefaultValueTransformer addValueTransformer:[self iso8601DateToDateValueTransformer]];
 
             // The latter three date format strings below represent the three
             // date formats specified by the HTTP/1.1 protocol.  See
