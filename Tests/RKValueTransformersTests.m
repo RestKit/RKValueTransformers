@@ -20,7 +20,7 @@
 
 #import <XCTest/XCTest.h>
 #define EXP_SHORTHAND
-#import "Expecta.h"
+#import <Expecta/Expecta.h>
 #import "RKValueTransformers.h"
 
 // Used to test subclass raising
