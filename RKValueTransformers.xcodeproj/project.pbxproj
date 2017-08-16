@@ -1,0 +1,778 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		FE0935991E80297D0092BF67 /* RKValueTransformers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE0935781E8029390092BF67 /* RKValueTransformers.framework */; };
+		FE0935A81E8029880092BF67 /* RKValueTransformers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE0935881E80296E0092BF67 /* RKValueTransformers.framework */; };
+		FE0935B41E8029C60092BF67 /* RKValueTransformers.h in Headers */ = {isa = PBXBuildFile; fileRef = FE0935AF1E8029C00092BF67 /* RKValueTransformers.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FE0935B51E8029C70092BF67 /* RKValueTransformers.h in Headers */ = {isa = PBXBuildFile; fileRef = FE0935AF1E8029C00092BF67 /* RKValueTransformers.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FE0935B61E8029CB0092BF67 /* RKValueTransformers.m in Sources */ = {isa = PBXBuildFile; fileRef = FE0935B01E8029C00092BF67 /* RKValueTransformers.m */; };
+		FE0935B81E8029CC0092BF67 /* RKValueTransformers.m in Sources */ = {isa = PBXBuildFile; fileRef = FE0935B01E8029C00092BF67 /* RKValueTransformers.m */; };
+		FE0935BE1E802AE70092BF67 /* RKValueTransformersTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FE0935BA1E8029E00092BF67 /* RKValueTransformersTests.m */; };
+		FE0935BF1E802AE70092BF67 /* RKValueTransformersTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FE0935BA1E8029E00092BF67 /* RKValueTransformersTests.m */; };
+		FE22D9421F44502600FBB6F6 /* Expecta.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE22D9311F444FE000FBB6F6 /* Expecta.framework */; };
+		FE22D9451F44507900FBB6F6 /* Expecta.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE22D9331F444FE000FBB6F6 /* Expecta.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		FE09359A1E80297D0092BF67 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FE09356F1E8029390092BF67 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FE0935771E8029390092BF67;
+			remoteInfo = "RKValueTransformers iOS";
+		};
+		FE0935A91E8029880092BF67 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FE09356F1E8029390092BF67 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FE0935871E80296E0092BF67;
+			remoteInfo = "RKValueTransformers macOS";
+		};
+		FE22D9301F444FE000FBB6F6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FE22D9251F444FE000FBB6F6 /* Expecta.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 908379791A8B972C009844DA;
+			remoteInfo = Expecta;
+		};
+		FE22D9321F444FE000FBB6F6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FE22D9251F444FE000FBB6F6 /* Expecta.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 908379111A8B9660009844DA;
+			remoteInfo = "Expecta-iOS";
+		};
+		FE22D9341F444FE000FBB6F6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FE22D9251F444FE000FBB6F6 /* Expecta.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3A0A598C1AD4418C003DA3E4;
+			remoteInfo = ExpectaTests;
+		};
+		FE22D9361F444FE000FBB6F6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FE22D9251F444FE000FBB6F6 /* Expecta.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3A0A59BF1AD441CB003DA3E4;
+			remoteInfo = "Expecta-iOSTests";
+		};
+		FE22D9381F444FE000FBB6F6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FE22D9251F444FE000FBB6F6 /* Expecta.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = E9ACDF0C13B2DD520010F4D7;
+			remoteInfo = libExpecta;
+		};
+		FE22D93A1F444FE000FBB6F6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FE22D9251F444FE000FBB6F6 /* Expecta.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = E93067CE13B2E6D100EA26FF;
+			remoteInfo = "libExpecta-iOS";
+		};
+		FE22D93C1F444FE000FBB6F6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FE22D9251F444FE000FBB6F6 /* Expecta.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 9C4416F917FF3F4A00978F09;
+			remoteInfo = libExpectaTests;
+		};
+		FE22D93E1F444FE000FBB6F6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FE22D9251F444FE000FBB6F6 /* Expecta.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = E93067DA13B2E6D100EA26FF;
+			remoteInfo = "libExpecta-iOSTests";
+		};
+		FE22D9401F44501F00FBB6F6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FE22D9251F444FE000FBB6F6 /* Expecta.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 908379781A8B972C009844DA;
+			remoteInfo = Expecta;
+		};
+		FE22D9431F44507600FBB6F6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FE22D9251F444FE000FBB6F6 /* Expecta.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 908379101A8B9660009844DA;
+			remoteInfo = "Expecta-iOS";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		FE0935781E8029390092BF67 /* RKValueTransformers.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RKValueTransformers.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FE0935881E80296E0092BF67 /* RKValueTransformers.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RKValueTransformers.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FE0935941E80297D0092BF67 /* RKValueTransformers.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RKValueTransformers.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		FE0935A31E8029880092BF67 /* RKValueTransformers.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RKValueTransformers.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		FE0935AF1E8029C00092BF67 /* RKValueTransformers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RKValueTransformers.h; sourceTree = "<group>"; };
+		FE0935B01E8029C00092BF67 /* RKValueTransformers.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RKValueTransformers.m; sourceTree = "<group>"; };
+		FE0935B21E8029C00092BF67 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FE0935BA1E8029E00092BF67 /* RKValueTransformersTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RKValueTransformersTests.m; sourceTree = "<group>"; };
+		FE0935BD1E802ACC0092BF67 /* RKValueTransformers.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = RKValueTransformers.podspec; sourceTree = "<group>"; };
+		FE22D9251F444FE000FBB6F6 /* Expecta.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Expecta.xcodeproj; path = Carthage/Checkouts/expecta/Expecta.xcodeproj; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		FE0935741E8029390092BF67 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FE0935841E80296E0092BF67 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FE0935911E80297D0092BF67 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FE22D9451F44507900FBB6F6 /* Expecta.framework in Frameworks */,
+				FE0935991E80297D0092BF67 /* RKValueTransformers.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FE0935A01E8029880092BF67 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FE22D9421F44502600FBB6F6 /* Expecta.framework in Frameworks */,
+				FE0935A81E8029880092BF67 /* RKValueTransformers.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		FE09356E1E8029390092BF67 = {
+			isa = PBXGroup;
+			children = (
+				FE0935BD1E802ACC0092BF67 /* RKValueTransformers.podspec */,
+				FE0935AE1E8029C00092BF67 /* Code */,
+				FE0935B11E8029C00092BF67 /* Tests */,
+				FE0935791E8029390092BF67 /* Products */,
+				FE22D9251F444FE000FBB6F6 /* Expecta.xcodeproj */,
+			);
+			sourceTree = "<group>";
+		};
+		FE0935791E8029390092BF67 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FE0935781E8029390092BF67 /* RKValueTransformers.framework */,
+				FE0935881E80296E0092BF67 /* RKValueTransformers.framework */,
+				FE0935941E80297D0092BF67 /* RKValueTransformers.xctest */,
+				FE0935A31E8029880092BF67 /* RKValueTransformers.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FE0935AE1E8029C00092BF67 /* Code */ = {
+			isa = PBXGroup;
+			children = (
+				FE0935AF1E8029C00092BF67 /* RKValueTransformers.h */,
+				FE0935B01E8029C00092BF67 /* RKValueTransformers.m */,
+			);
+			path = Code;
+			sourceTree = "<group>";
+		};
+		FE0935B11E8029C00092BF67 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				FE0935B21E8029C00092BF67 /* Info.plist */,
+				FE0935BA1E8029E00092BF67 /* RKValueTransformersTests.m */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		FE22D9261F444FE000FBB6F6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FE22D9311F444FE000FBB6F6 /* Expecta.framework */,
+				FE22D9331F444FE000FBB6F6 /* Expecta.framework */,
+				FE22D9351F444FE000FBB6F6 /* ExpectaTests.xctest */,
+				FE22D9371F444FE000FBB6F6 /* Expecta-iOSTests.xctest */,
+				FE22D9391F444FE000FBB6F6 /* libExpecta.a */,
+				FE22D93B1F444FE000FBB6F6 /* libExpecta.a */,
+				FE22D93D1F444FE000FBB6F6 /* libExpectaTests.xctest */,
+				FE22D93F1F444FE000FBB6F6 /* libExpecta-iOSTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		FE0935751E8029390092BF67 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FE0935B41E8029C60092BF67 /* RKValueTransformers.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FE0935851E80296E0092BF67 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FE0935B51E8029C70092BF67 /* RKValueTransformers.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		FE0935771E8029390092BF67 /* RKValueTransformers iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FE0935801E8029390092BF67 /* Build configuration list for PBXNativeTarget "RKValueTransformers iOS" */;
+			buildPhases = (
+				FE0935731E8029390092BF67 /* Sources */,
+				FE0935741E8029390092BF67 /* Frameworks */,
+				FE0935751E8029390092BF67 /* Headers */,
+				FE0935761E8029390092BF67 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "RKValueTransformers iOS";
+			productName = RKValueTransformers;
+			productReference = FE0935781E8029390092BF67 /* RKValueTransformers.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		FE0935871E80296E0092BF67 /* RKValueTransformers macOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FE09358D1E80296E0092BF67 /* Build configuration list for PBXNativeTarget "RKValueTransformers macOS" */;
+			buildPhases = (
+				FE0935831E80296E0092BF67 /* Sources */,
+				FE0935841E80296E0092BF67 /* Frameworks */,
+				FE0935851E80296E0092BF67 /* Headers */,
+				FE0935861E80296E0092BF67 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "RKValueTransformers macOS";
+			productName = "RKValueTransformers macOS";
+			productReference = FE0935881E80296E0092BF67 /* RKValueTransformers.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		FE0935931E80297D0092BF67 /* RKValueTransformers iOS Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FE09359C1E80297D0092BF67 /* Build configuration list for PBXNativeTarget "RKValueTransformers iOS Tests" */;
+			buildPhases = (
+				FE0935901E80297D0092BF67 /* Sources */,
+				FE0935911E80297D0092BF67 /* Frameworks */,
+				FE0935921E80297D0092BF67 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FE22D9441F44507600FBB6F6 /* PBXTargetDependency */,
+				FE09359B1E80297D0092BF67 /* PBXTargetDependency */,
+			);
+			name = "RKValueTransformers iOS Tests";
+			productName = "RKValueTransformers iOS Tests";
+			productReference = FE0935941E80297D0092BF67 /* RKValueTransformers.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		FE0935A21E8029880092BF67 /* RKValueTransformers macOS Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FE0935AB1E8029880092BF67 /* Build configuration list for PBXNativeTarget "RKValueTransformers macOS Tests" */;
+			buildPhases = (
+				FE09359F1E8029880092BF67 /* Sources */,
+				FE0935A01E8029880092BF67 /* Frameworks */,
+				FE0935A11E8029880092BF67 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FE22D9411F44501F00FBB6F6 /* PBXTargetDependency */,
+				FE0935AA1E8029880092BF67 /* PBXTargetDependency */,
+			);
+			name = "RKValueTransformers macOS Tests";
+			productName = "RKValueTransformers macOS Tests";
+			productReference = FE0935A31E8029880092BF67 /* RKValueTransformers.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		FE09356F1E8029390092BF67 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0830;
+				ORGANIZATIONNAME = RestKit;
+				TargetAttributes = {
+					FE0935771E8029390092BF67 = {
+						CreatedOnToolsVersion = 8.2.1;
+						ProvisioningStyle = Automatic;
+					};
+					FE0935871E80296E0092BF67 = {
+						CreatedOnToolsVersion = 8.2.1;
+						ProvisioningStyle = Automatic;
+					};
+					FE0935931E80297D0092BF67 = {
+						CreatedOnToolsVersion = 8.2.1;
+						ProvisioningStyle = Automatic;
+					};
+					FE0935A21E8029880092BF67 = {
+						CreatedOnToolsVersion = 8.2.1;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = FE0935721E8029390092BF67 /* Build configuration list for PBXProject "RKValueTransformers" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = FE09356E1E8029390092BF67;
+			productRefGroup = FE0935791E8029390092BF67 /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = FE22D9261F444FE000FBB6F6 /* Products */;
+					ProjectRef = FE22D9251F444FE000FBB6F6 /* Expecta.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				FE0935771E8029390092BF67 /* RKValueTransformers iOS */,
+				FE0935931E80297D0092BF67 /* RKValueTransformers iOS Tests */,
+				FE0935871E80296E0092BF67 /* RKValueTransformers macOS */,
+				FE0935A21E8029880092BF67 /* RKValueTransformers macOS Tests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		FE22D9311F444FE000FBB6F6 /* Expecta.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Expecta.framework;
+			remoteRef = FE22D9301F444FE000FBB6F6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		FE22D9331F444FE000FBB6F6 /* Expecta.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Expecta.framework;
+			remoteRef = FE22D9321F444FE000FBB6F6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		FE22D9351F444FE000FBB6F6 /* ExpectaTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = ExpectaTests.xctest;
+			remoteRef = FE22D9341F444FE000FBB6F6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		FE22D9371F444FE000FBB6F6 /* Expecta-iOSTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Expecta-iOSTests.xctest";
+			remoteRef = FE22D9361F444FE000FBB6F6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		FE22D9391F444FE000FBB6F6 /* libExpecta.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libExpecta.a;
+			remoteRef = FE22D9381F444FE000FBB6F6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		FE22D93B1F444FE000FBB6F6 /* libExpecta.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libExpecta.a;
+			remoteRef = FE22D93A1F444FE000FBB6F6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		FE22D93D1F444FE000FBB6F6 /* libExpectaTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = libExpectaTests.xctest;
+			remoteRef = FE22D93C1F444FE000FBB6F6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		FE22D93F1F444FE000FBB6F6 /* libExpecta-iOSTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "libExpecta-iOSTests.xctest";
+			remoteRef = FE22D93E1F444FE000FBB6F6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		FE0935761E8029390092BF67 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FE0935861E80296E0092BF67 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FE0935921E80297D0092BF67 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FE0935A11E8029880092BF67 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		FE0935731E8029390092BF67 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FE0935B61E8029CB0092BF67 /* RKValueTransformers.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FE0935831E80296E0092BF67 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FE0935B81E8029CC0092BF67 /* RKValueTransformers.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FE0935901E80297D0092BF67 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FE0935BE1E802AE70092BF67 /* RKValueTransformersTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FE09359F1E8029880092BF67 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FE0935BF1E802AE70092BF67 /* RKValueTransformersTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		FE09359B1E80297D0092BF67 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FE0935771E8029390092BF67 /* RKValueTransformers iOS */;
+			targetProxy = FE09359A1E80297D0092BF67 /* PBXContainerItemProxy */;
+		};
+		FE0935AA1E8029880092BF67 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FE0935871E80296E0092BF67 /* RKValueTransformers macOS */;
+			targetProxy = FE0935A91E8029880092BF67 /* PBXContainerItemProxy */;
+		};
+		FE22D9411F44501F00FBB6F6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Expecta;
+			targetProxy = FE22D9401F44501F00FBB6F6 /* PBXContainerItemProxy */;
+		};
+		FE22D9441F44507600FBB6F6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Expecta-iOS";
+			targetProxy = FE22D9431F44507600FBB6F6 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		FE09357E1E8029390092BF67 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = RKValueTransformers;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		FE09357F1E8029390092BF67 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = RKValueTransformers;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		FE0935811E8029390092BF67 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = org.restkit.RKValueTransformers;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		FE0935821E8029390092BF67 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = org.restkit.RKValueTransformers;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		FE09358E1E80296E0092BF67 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				PRODUCT_BUNDLE_IDENTIFIER = "org.restkit.RKValueTransformers-macOS";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		FE09358F1E80296E0092BF67 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				PRODUCT_BUNDLE_IDENTIFIER = "org.restkit.RKValueTransformers-macOS";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		FE09359D1E80297D0092BF67 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = Tests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.restkit.RKValueTransformers-iOS-Tests";
+			};
+			name = Debug;
+		};
+		FE09359E1E80297D0092BF67 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = Tests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.restkit.RKValueTransformers-iOS-Tests";
+			};
+			name = Release;
+		};
+		FE0935AC1E8029880092BF67 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = Tests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				PRODUCT_BUNDLE_IDENTIFIER = "org.restkit.RKValueTransformers-macOS-Tests";
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		FE0935AD1E8029880092BF67 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = Tests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				PRODUCT_BUNDLE_IDENTIFIER = "org.restkit.RKValueTransformers-macOS-Tests";
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		FE0935721E8029390092BF67 /* Build configuration list for PBXProject "RKValueTransformers" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FE09357E1E8029390092BF67 /* Debug */,
+				FE09357F1E8029390092BF67 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FE0935801E8029390092BF67 /* Build configuration list for PBXNativeTarget "RKValueTransformers iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FE0935811E8029390092BF67 /* Debug */,
+				FE0935821E8029390092BF67 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FE09358D1E80296E0092BF67 /* Build configuration list for PBXNativeTarget "RKValueTransformers macOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FE09358E1E80296E0092BF67 /* Debug */,
+				FE09358F1E80296E0092BF67 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FE09359C1E80297D0092BF67 /* Build configuration list for PBXNativeTarget "RKValueTransformers iOS Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FE09359D1E80297D0092BF67 /* Debug */,
+				FE09359E1E80297D0092BF67 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FE0935AB1E8029880092BF67 /* Build configuration list for PBXNativeTarget "RKValueTransformers macOS Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FE0935AC1E8029880092BF67 /* Debug */,
+				FE0935AD1E8029880092BF67 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = FE09356F1E8029390092BF67 /* Project object */;
+}

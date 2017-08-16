@@ -2,6 +2,7 @@ RKValueTransformers
 ===================
 
 [![Build Status](http://img.shields.io/travis/RestKit/RKValueTransformers/master.svg?style=flat)](https://travis-ci.org/RestKit/RKValueTransformers) 
+[![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 ![Pod Version](http://cocoapod-badges.herokuapp.com/v/RKValueTransformers/badge.png) 
 ![Pod Platform](http://cocoapod-badges.herokuapp.com/p/RKValueTransformers/badge.png)
 
